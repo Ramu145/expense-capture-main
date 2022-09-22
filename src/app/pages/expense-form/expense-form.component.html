@@ -1,0 +1,53 @@
+<form [formGroup]="expenseForm" (ngSubmit)='AddExpense(expenseForm)'>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Employee ID <span>*</span></label>
+        <input nbInput fullWidth class="form-control"  placeholder="Employee ID" formControlName="empId" status="primary"/>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Employee Name <span>*</span></label>
+        <input nbInput fullWidth class="form-control" placeholder="Employee Name" formControlName="empName" status="primary"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group-desc">
+        <label>Expense Description <span>*</span></label>
+        <textarea nbInput fullWidth placeholder="Description" status="primary" formControlName="empDescription"></textarea>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Expense Type <span>*</span></label>
+        <nb-select fullWidth placeholder="Expense Type" formControlName="expenseSubType" [(selected)]="selectedSubItem" status="primary">
+          <nb-option *ngFor="let item of expense_Sub_type" [value]="item.name">{{item.name}}</nb-option>
+        </nb-select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Expense Date <span>*</span></label>
+        <input nbInput fullWidth placeholder="Expense Date" class="form-control" formControlName="expenseDate" [nbDatepicker]="formpicker" status="primary">
+        <nb-rangepicker #formpicker></nb-rangepicker>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6"></div>
+      <div class="col-md-6 text_right">
+      <div class="btn_block">
+      <button nbButton status="primary" type="submit" class="submit">Submit</button>
+      <button nbButton >Cancel</button>
+      </div>
+    </div>
+  </div>
+  </form>

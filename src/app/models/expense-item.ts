@@ -4,7 +4,7 @@ export class ExpenseItem {
     id: number;
     name: string;
     description: string;
-    expenseType: ExpenseType;
+    expenseType: string;
     expenseDate: Date;
     value: number;
   }

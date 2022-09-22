@@ -1,0 +1,30 @@
+// .field_name{
+//     text-align: right;
+// }
+.form-group{
+height:75px;
+label{
+    padding-bottom:5px;
+    span{
+        color:red;
+        font-weight: bolder;
+    }
+}
+}
+.form-group-desc{
+    height:100px;
+    label{
+        padding-bottom:5px;
+        color:#1b2f54;
+        span{
+            color:red;
+            font-weight: bolder;
+        }
+    }
+}
+.submit{
+    margin-right:10px;
+}
+.text_right{
+    text-align: right;
+}

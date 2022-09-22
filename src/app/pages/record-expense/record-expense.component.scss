@@ -1,0 +1,30 @@
+:host ::ng-deep{
+.expense_main{
+    width:60%;
+    margin: auto;
+    border: 0.0625rem solid #1b2f54;
+}
+.expense_header{
+    background: #1b2f54;
+    color:#fff;
+    text-align: center;
+    .header_text{
+        position: relative;
+        .expense_header_icon{
+            position: absolute;
+            right:-30px;
+            top:-5px;
+            width:20px;
+    
+        }
+    }
+}
+
+.expense_type_container{
+    display: block;
+    height: 50px;
+    text-align: right;
+}
+
+ 
+}

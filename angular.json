@@ -28,7 +28,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@nebular/theme/styles/prebuilt/default.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -123,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "expense-capture"
+    }
+  },
+  "defaultProject": "expense-capture",
+  "cli": {
+    "analytics": "a6b432e2-9b5f-4f54-a6bd-b6cf7b21898a"
+  }
 }

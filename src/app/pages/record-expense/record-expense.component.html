@@ -1,0 +1,25 @@
+<nb-card class="expense_main">
+    <nb-card-header class="expense_header">
+      <span class="header_text">
+        Record Expense
+        <img src="assets/file-invoice-dollar-solid.svg" alt="" class="expense_header_icon">
+      </span>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="expense_type_container">
+      <label class="expense_label">
+      <b>Please Select Expense Type :&nbsp;</b>
+      </label>
+        <nb-select placeholder="Expense Type" [(selected)]="selectedItem" status="primary">
+          <nb-option *ngFor="let item of expense_type" [value]="item.name">{{item.name}}</nb-option>
+        </nb-select>
+      </div>
+      <hr/>
+      <div class="form_container" *ngIf="selectedItem">
+     <app-expense-form></app-expense-form>
+
+      </div>
+        
+    </nb-card-body>
+    <nb-card-footer>0 Reimbursements recorded</nb-card-footer>
+  </nb-card>
