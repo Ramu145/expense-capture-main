@@ -6,7 +6,7 @@
       </span>
     </nb-card-header>
     <nb-card-body>
-      <div class="expense_type_container">
+      <!-- <div class="expense_type_container">
       <label class="expense_label">
       <b>Please Select Expense Type :&nbsp;</b>
       </label>
@@ -14,12 +14,55 @@
           <nb-option *ngFor="let item of expense_type" [value]="item.name">{{item.name}}</nb-option>
         </nb-select>
       </div>
-      <hr/>
-      <div class="form_container" *ngIf="selectedItem">
+      <hr/> -->
+      <div class="form_container">
      <app-expense-form></app-expense-form>
 
       </div>
         
     </nb-card-body>
-    <nb-card-footer>0 Reimbursements recorded</nb-card-footer>
+    <nb-card-footer>{{totalExpenses}} Expenses recorded</nb-card-footer>
+  </nb-card>
+
+  <nb-card class="expense_card" *ngFor="let expense of allExpense">
+    <nb-card-header class="expense_header">
+      <img src="assets/tick-box.svg" class="tick_icon">
+      {{expense.expenseType}} Expense recorded  <span class="price">${{expense.value}}</span>
+    </nb-card-header>
+    <nb-card-body>
+
+      
+     <div class="row">
+      <div class="col-md-6">
+        <label>Expense ID </label>
+       <span class="value">{{expense.id}}</span>  
+      </div>
+      <div class="col-md-6">
+        <label>Expense Name </label>
+        <span class="value">{{expense.name}}</span>
+
+
+      </div>
+      <div class="col-md-6">
+        <label>Expense Type </label>
+      <span class="value">{{expense.expenseType}}</span>
+        
+      </div>
+      <div class="col-md-6">
+
+        <label>Expense Date </label>
+        <span class="value">{{expense.expenseDate}}</span>
+
+
+      </div>
+      
+     </div>
+     <div class="row">
+      <div class="col-md-12">
+        <label>Expense Date </label>
+        <span class="value">{{expense.description}}</span>
+
+      </div>
+     </div>
+    </nb-card-body>
   </nb-card>

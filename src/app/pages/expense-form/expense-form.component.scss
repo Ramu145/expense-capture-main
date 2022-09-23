@@ -24,7 +24,29 @@ label{
 }
 .submit{
     margin-right:10px;
+    background: #1b2f54 !important;
+    border:1px solid #1b2f54 !important;
+}
+.submit:hover{
+    margin-right:10px;
+    background: #1b2f54 !important;
+    border:1px solid #1b2f54 !important;
 }
 .text_right{
     text-align: right;
+}
+
+.error_msg{
+    color:red;
+    font-weight: bold;
+    text-align: center;
+    padding-top:10px;
+    display: block;
+}
+.success_msg{
+    color:green;
+    font-weight: bold;
+    text-align: center;
+    padding-top:10px;
+    display: block;
 }

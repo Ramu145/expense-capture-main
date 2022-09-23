@@ -13,7 +13,7 @@ import { ExpenseFormComponent } from './pages/expense-form/expense-form.componen
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import {ExpenseReducer} from './reducers/expense.reducers'
-
+import {ExpenseService} from './services/expense.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +37,7 @@ import {ExpenseReducer} from './reducers/expense.reducers'
     NbButtonModule,
     StoreModule.forRoot({expense: ExpenseReducer})
   ],
-  providers: [],
+  providers: [ExpenseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

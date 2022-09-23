@@ -3,7 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store';
 import { ExpenseItem } from 'src/app/models/expense-item';
 import {addExpense, getExpense} from '../../store/actions/reimbursement.action';
-import {createExpense} from '../../selectors/expense.selector'
+import {createExpense, getExpenseValues} from '../../selectors/expense.selector'
+import { ExpenseService } from 'src/app/services/expense.service';
 
  export const Expense :ExpenseItem[] = [
   {
@@ -17,7 +18,7 @@ import {createExpense} from '../../selectors/expense.selector'
     id: 2,
     name: 'Meeting with The Client',
     description: 'A Meeting With The Client In Lunch Time',
-    expenseType: 'Food',
+    expenseType: 'Accommodation',
     expenseDate: new Date('21-09-2022'),
     value: 200
   }
@@ -30,40 +31,77 @@ import {createExpense} from '../../selectors/expense.selector'
 })
 export class ExpenseFormComponent implements OnInit {
   expenseEntries;
+  allExprenseValues;
   expenseForm: FormGroup;
+  submitted = false;
+  successMsg = false;
   expense_Sub_type = [
-    {name:'Client Visit'},
-    {name:'Employee Benfit'},
+    {name:'Accommodation'},
+    {name:'Food'},
+    {name:'Milage'},
+    {name:'PublicTransport'},
 ]
 selectedSubItem = '';
-  constructor(private fb: FormBuilder, private store:Store) {
+  constructor(private fb: FormBuilder, private store:Store, private service:ExpenseService) {
     this.expenseEntries = this.store.select(createExpense);
     console.log(this.expenseEntries);
    }
 
   ngOnInit(): void {
-
-    this.store.dispatch(addExpense(JSON.parse(JSON.stringify(Expense))));
-
+if(localStorage.getItem('state') == null){
+  this.store.dispatch(addExpense(JSON.parse(JSON.stringify(Expense))));
+  
+}
+    this.getExpense();
     this.expenseForm = this.fb.group({
-      'empId':  [null,Validators.required],
-      'empName': [null, Validators.required],
-      'empDescription': [null, Validators.required],
-      'expenseSubType':  [null,Validators.required],
-      'expenseDate':  [null,Validators.required]
+      'id':  ['',Validators.required],
+      'name': ['', Validators.required],
+      'description': ['', Validators.required],
+      'expenseType':  ['',Validators.required],
+      'expenseDate':  ['',Validators.required],
+      'value':  ['',Validators.required, Validators.pattern('[0-9]*')],
     })
+    this.service.getAllRecords.next(JSON.parse(localStorage.getItem('state')))
  
   }
 
   AddExpense(formValue){
-    debugger
-    let expense = Expense.push();
-    this.store.dispatch(addExpense(JSON.parse(JSON.stringify(formValue.value))));
-    // this.store.dispatch(addExpense(this.expenseEntries))
-    // console.log(formValue.value);
+
+ if(this.expenseForm.invalid){
+  this.submitted = true;
+  return
+ }else{
+  this.submitted = false;
+  this.successMsg = true;
+  let expense = Expense.push(formValue.value);
+    //console.log(Expense);
+    this.store.dispatch(addExpense(JSON.parse(JSON.stringify(Expense))));
+    this.service.getAllRecords.next(JSON.parse(localStorage.getItem('state')))
+    // this.getExpense();
+  this.expenseForm.reset();
+ }
+    
+
   }
-  // getAllExpense(): void{
-  //   this.store.dispatch(getExpense());
-  //   console.log(this.store.select(getExpense))
-  // }
+
+  getExpense(){
+  this.allExprenseValues = this.store.select(getExpenseValues); 
+    console.log('this is get values', this.allExprenseValues);
+
+  }
+  onReset(): void {
+    this.submitted = false;
+    this.expenseForm.reset();
+  }
+  keyPressNumbers(event) {
+    var charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
 }

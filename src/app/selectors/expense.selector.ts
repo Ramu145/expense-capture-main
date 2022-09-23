@@ -7,8 +7,8 @@ export const createExpense = createSelector(
         return state;
     }
 )
-export const getExpense = createSelector(
-    createFeatureSelector('gettingAllExpense'),
+export const getExpenseValues = createSelector(
+    createFeatureSelector('get Expense Values'),
     (state:ExpenseItem[])=>{
         return state;
 
